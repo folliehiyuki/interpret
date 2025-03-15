@@ -215,6 +215,12 @@ var extensions = {
         hook(Object.assign({}, config, { extensions: '.jsx' }));
       },
     },
+    {
+      module: 'jiti/lib/jiti-register.mjs',
+      register: function () {
+        process.env.JITI_JSX = true
+      },
+    },
     'sucrase/register/jsx',
   ],
   '.litcoffee': 'coffeescript/register',
@@ -366,6 +372,7 @@ var extensions = {
   '.ts': [
     'ts-node/register',
     'sucrase/register/ts',
+    'jiti/lib/jiti-register.mjs',
     {
       module: '@babel/register',
       register: function (hook, config) {
@@ -425,10 +432,16 @@ var extensions = {
       },
     },
   ],
-  '.cts': ['ts-node/register'],
+  '.cts': ['ts-node/register', 'jiti/lib/jiti-register.mjs'],
   '.tsx': [
     'ts-node/register',
     'sucrase/register/tsx',
+    {
+      module: 'jiti/lib/jiti-register.mjs',
+      register: function () {
+        process.env.JITI_JSX = true
+      },
+    },
     {
       module: '@babel/register',
       register: function (hook, config) {
